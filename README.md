@@ -1,5 +1,5 @@
 #迷你世界 Small-World
-**I always have a dream of making my own game.**  
-I tried on WarTime-Project, but finally that repo turned into a Online Share Library...  
-Well, this time I will try again.  
-(PS: Why GitHub supports Chinese so badly ?)  
+**我一直梦想能有一款自己写的游戏**  
+当初，建立WarTime-Project时，我确实是想做成游戏的。然而最终却成为了代码积累库，当然也不坏啦= =  
+嘛，这次真的要做出游戏啦！  
+*讲道理...GitHub改版之后在线中文输入简直太难了...*  
