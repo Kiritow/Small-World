@@ -2,13 +2,14 @@
 1473999219 source:d:\codeblocks_codes\smallworld20160916\main.cpp
 	"game.h"
 
-1474422483 d:\codeblocks_codes\smallworld20160916\game.h
+1474456679 d:\codeblocks_codes\smallworld20160916\game.h
 	<cpplib/cpplib#gsock>
 	<cpplib/cpplib#time>
 	<cpplib/cpplib#gcolor>
 	<string>
 	"cppimport.h"
 	"keybox.h"
+	"mapbox.h"
 	"base64.h"
 
 1473997097 d:\codeblocks_codes\smallworld20160916\cppimport.h
@@ -24,7 +25,18 @@
 	<cstdio>
 	<string>
 
-1473998004 d:\codeblocks_codes\smallworld20160916\base64.h
+1474456699 d:\codeblocks_codes\smallworld20160916\base64.h
 	<iostream>
 	<string>
+
+1474456713 d:\codeblocks_codes\smallworld20160916\mapbox.h
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<map>
+	<memory>
+	<string>
+	<sstream>
+	"base64.h"
+	<cpplib/cpplib#gsock>
 
