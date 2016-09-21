@@ -117,6 +117,7 @@ void OnExit()
 
     /// All Done.
     printf("Shutdown Now.\n");
+    cprint();
     _OnExit_RealExit();
 }
 
@@ -272,4 +273,7 @@ int Login()
             auth_cookie_key=tmp;
         }
     }
+
+
+    return 0;/// END
 }
