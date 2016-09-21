@@ -4,6 +4,7 @@
 #include <string>
 #include "cppimport.h"
 #include "keybox.h"
+#include "mapbox.h"
 #include "base64.h"
 
 #ifdef __C4DROID__
