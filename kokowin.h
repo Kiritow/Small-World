@@ -6,7 +6,7 @@
 *   *KoKo Win Library* is a C/C++ Library
 *   Designed and Written by Kiritow.
 *   Created For Light Window System.
-*
+*   Created : 20160923
 */
 
 #ifndef _kokowin_h
