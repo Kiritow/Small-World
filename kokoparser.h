@@ -13,6 +13,7 @@
 *   *KoKo Parser System* is a group of methods
 *       which can parse SourceString into drawable objects
 *       or parse SourceString and draw things on Screen.
+* 	Created : 20160923
 */
 
 #ifndef _kokoparser_h
