@@ -57,7 +57,7 @@ const char* source=
 "{goto=0,0}{color=white,black}Choose Your Team Now !\n"
 "{color=black,blue}Union of Citys{choice=white,black,black,blue,same,[# Make the world peaceful.#]}\n"
 "{color=black,red}Party of Independence{choice=white,black,black,red,same,[# Fighting for new independent world.#]}\n"
-"{color=black,yellow}Neutrality{clear=}{choice=white,black,black,yellow,same,[# No political thoughts.#]}\n";
+"{color=black,yellow}Neutrality{choice=white,black,black,yellow,same,[# No political thoughts.#]}\n";
 
 int main()
 {
@@ -67,3 +67,51 @@ int main()
   return 0;
 }
 ```
+
+## Use Objects
+
+**class** DrawableObject 
+>
+**Important**: This is a virtual class and cannot be instantiated. All Drawable Objects are derived from here.  
+**virtual** *void* draw(*DrawPen&* pen)
+**virtual** *void* drawat(*DrawPen&* pen,*int* x,*int* y)
+
+**class** Text : **public** *DrawableObject*  
+>
+Text with color information.  
+
+**class** Choice : **public** *DrawableObject*  
+>
+A Choice. Can be activate and inactivate. Use Text inside.  
+**virtual** *void* activate()  
+**virtual** *void* inactivate()  
+
+
+**class** CommandObject : **public** *DrawableObject*  
+>
+**Important**: This is a virtual class and cannot be instantiated. All Commands(Executable Objects) are derived from here.  
+**virtual** *void* execute(*DrawPen&* pen)  
+  Derived class should rewrite this method. This method will be executed when **execute** or **draw** or **drawat** called.  
+
+**class** MoveCursorCMD : **public** *CommandObject*  
+>
+Move Cursor. Call **DrawPen::gotoxy_public** inside.  
+
+**class** CleanScreenCMD : **public** *CommandObject*  
+>
+Clean the screen. Call **DrawPen::clear** inside.  
+
+
+**class** DrawPen  
+>
+DrawPen is a pen which will directly operate on the screen and change the console. **DrawPen::print_real** will call **printf**.  
+
+**class** Screen  
+>
+A Screen stores many Drawable Objects. You can set display mode in Screen. It use an internal DrawPen to show objects.  
+
+**class** ScreenStack [Unfinished]
+>
+ScreenStack is a stack that stores screens. Screens are sorted by Screen-Weight. The lower screen-weight, the lower level of the screen. Screen with low level will be displayed firstly and may be covered by later screens.  
+ScreenStack will be part of **class** WindowManager in later version.  
+
