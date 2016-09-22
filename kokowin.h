@@ -42,6 +42,7 @@ public:
     }
     void clear()/// Clear Whole Area and reset ch and cw to 0, reset color to default color
     {
+        DrawPen::gotoxy(0,0);
         int w=RightDown.x-LeftUp.x;
         int h=RightDown.y-LeftUp.y;
         memset(buff,' ',w);
@@ -49,11 +50,11 @@ public:
         ::cprint();
         for(int i=0;i<h;i++)
         {
-            gotoxy(0,i);
+            DrawPen::gotoxy(0,i);
             printf(buff);
         }
-        ch=0;
-        cw=0;
+        restart();
+        DrawPen::gotoxy(0,0);
     }
     int print_deal() /// Deal With Buffer. WARNING: '\t' is not recognized
     {
