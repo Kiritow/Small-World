@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MAP_H
+#define _MAP_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -109,3 +110,4 @@ int main()
     printf("%s\n",s.c_str());
 }
 */
+#endif /*End of _MAP_H*/
