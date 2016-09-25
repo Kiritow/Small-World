@@ -33,6 +33,12 @@ public:
     {
         return pool.find(key)!=pool.end();
     }
+    string* getvalp(string key)
+    {
+        auto iter=pool.find(key);
+        if(iter==pool.end()) return nullptr;
+        else return &(iter->second);
+    }
     void clear()
     {
         pool.clear();

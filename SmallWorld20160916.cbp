@@ -37,6 +37,7 @@
 		<Unit filename="game.h" />
 		<Unit filename="keybox.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mapbox.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

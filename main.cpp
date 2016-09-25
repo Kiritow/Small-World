@@ -7,8 +7,6 @@
 #include "game.h"
 using namespace std;
 
-import("SmallWorldMain.dll",_main_DLL);
-getfuncin(_main_DLL,int,GameStart,void*);
 int main()
 {
     SelfCheck();

@@ -142,6 +142,8 @@ void StartUpdate()
 
 }
 
+
+/// Reserved
 void SelfCheck()
 {
     printf("GameHarbor Loader (For SmallWorld)\n");
@@ -211,12 +213,12 @@ int Login()
     gets(rawpass);
 
     log("UserName and Pass Got.");
-    printf("Connecting to GameHarbor.net...");
-    string b64pass=base64_encode((unsigned char*)rawpass,strlen(rawpass));
-    memset(rawpass,0,1024);
-    KeyBox box;
-    box.addKey(makekey("uname",username));
-    box.addKey(makekey("bpass",b64pass));
+    printf("Connecting to GameHarbor...\n");
+
+    MapBox box;
+    box.add("uname",username);
+    box.add("pass",rawpass);
+
     string server_ip;
     if(_CONFIG_GAMEHARBOR_NET_DOMAIN_NEED_DNS)
     {
@@ -239,7 +241,7 @@ int Login()
     if(ret<0)
     {
         log("Connect Return %d, Failed to connect to %s",ret,server_ip.c_str());
-        printf("Failed when connecting to GameHarbor.net.\n");
+        printf("Failed when connecting to GameHarbor.\n");
         return -2;
     }
     ret=s.send(box);
@@ -247,7 +249,7 @@ int Login()
     if(ret<0)
     {
         log("Error Occur While Sending AUTH. ret=%d",ret);
-        printf("Failed when connecting to GameHarbor.net.\n");
+        printf("Failed when connecting to GameHarbor.\n");
         return -3;
     }
     box.clear();
@@ -255,26 +257,28 @@ int Login()
     if(ret<0)
     {
         log("Error Occur While Receving AUTH. ret=%d",ret);
-        printf("Failed when connecting to GameHarbor.net.\n");
+        printf("Failed when connecting to GameHarbor.\n");
         return -4;
     }
-    string auth_status_key;
-    string auth_cookie_key;
-    string tmp;
-    box.reset();
-    while(box.nextKey(tmp))
+
+    if(!box.haskey("STATUS"))
     {
-        string tag=extracttag(tmp);
-        if(tag=="STATUS")
-        {
-            auth_status_key=tmp;
-        }
-        else if(tag=="UUID")
-        {
-            auth_cookie_key=tmp;
-        }
+        log("Bad Response. No Status Received.");
+        printf("Failed when connecting to GameHarbor.\n");
+        return -5;
     }
 
+    string uuid_cookie;
+    if(box["STATUS"]=="OK")
+    {
+        if(!box.haskey("UUID"))
+        {
+            log("Bad Response. No UUID Found.\n");
+            printf("Failed when connecting to GameHarbor.\n");
+            return -6;
+        }
+        uuid_cookie=box["UUID"];
+    }
 
     return 0;/// END
 }
