@@ -39,17 +39,17 @@ color parse_basic_getcolor(const char* str)
 
 void parse_basic(const char* str)
 {
-	int L=strlen(str);
-	char* p=(char*)str;
-	while(p<str+L)
-	{
-		char* q=strstr(p,"{");
-		if(q==NULL)
-		{
-			printf("%s",p);
-			break;
-		}
-		if(q!=p)
+    int L=strlen(str);
+    char* p=(char*)str;
+    while(p<str+L)
+    {
+        char* q=strstr(p,"{");
+        if(q==NULL)
+        {
+            printf("%s",p);
+            break;
+        }
+        if(q!=p)
         {
             char* content=new char[q-p+32];
             memset(content,0,q-p+32);
@@ -57,28 +57,28 @@ void parse_basic(const char* str)
             printf("%s",content);
             delete[] content;
         }
-		char* qend=strstr(q,"}");
-		char* cl=strstr(q,"=");
-		char* cmdstr=new char[cl-q];
-		unique_ptr<char[]> upa(cmdstr);
-		memset(cmdstr,0,cl-q);
-		strncpy(cmdstr,q+1,cl-q-1);
-		if(strcmp(cmdstr,"color")==0) /// Change Color
-		{
-			char fcolor[16];
-			memset(fcolor,0,16);
-			char bcolor[16];
-			memset(bcolor,0,16);
-			char* comma=strstr(cl,",");
-			strncpy(fcolor,cl+1,comma-cl-1);
-			strncpy(bcolor,comma+1,qend-comma-1);
-			color fi=parse_basic_getcolor(fcolor);
-			color bi=parse_basic_getcolor(bcolor);
-			cprint(fi,bi);
-			p=qend+1;
-			continue;
-		}
-		else if(strcmp(cmdstr,"goto")==0) /// Move Cursor To X,Y
+        char* qend=strstr(q,"}");
+        char* cl=strstr(q,"=");
+        char* cmdstr=new char[cl-q];
+        unique_ptr<char[]> upa(cmdstr);
+        memset(cmdstr,0,cl-q);
+        strncpy(cmdstr,q+1,cl-q-1);
+        if(strcmp(cmdstr,"color")==0) /// Change Color
+        {
+            char fcolor[16];
+            memset(fcolor,0,16);
+            char bcolor[16];
+            memset(bcolor,0,16);
+            char* comma=strstr(cl,",");
+            strncpy(fcolor,cl+1,comma-cl-1);
+            strncpy(bcolor,comma+1,qend-comma-1);
+            color fi=parse_basic_getcolor(fcolor);
+            color bi=parse_basic_getcolor(bcolor);
+            cprint(fi,bi);
+            p=qend+1;
+            continue;
+        }
+        else if(strcmp(cmdstr,"goto")==0) /// Move Cursor To X,Y
         {
             char fpos[16];
             memset(fpos,0,16);
@@ -104,26 +104,26 @@ void parse_basic(const char* str)
         {
             p=qend+1;
         }
-	}/// End of loop
+    }/// End of loop
 }
 
 Screen* parse_str_basic(const char* str)
 {
     Screen* pScreen=new Screen;
     int L=strlen(str);
-	char* p=(char*)str;
-	color cf=color::white;
-	color cb=color::black;
-	while(p<str+L)
-	{
-		char* q=strstr(p,"{");
-		if(q==NULL)
-		{
-			Text* ptext=new Text(p,cf,cb);
-			pScreen->add(ptext);
-			break;
-		}
-		if(q!=p)
+    char* p=(char*)str;
+    color cf=color::white;
+    color cb=color::black;
+    while(p<str+L)
+    {
+        char* q=strstr(p,"{");
+        if(q==NULL)
+        {
+            Text* ptext=new Text(p,cf,cb);
+            pScreen->add(ptext);
+            break;
+        }
+        if(q!=p)
         {
             char* content=new char[q-p+32];
             memset(content,0,q-p+32);
@@ -132,29 +132,29 @@ Screen* parse_str_basic(const char* str)
             pScreen->add(ptext);
             delete[] content;
         }
-		char* qend=strstr(q,"}");
-		char* cl=strstr(q,"=");
-		char* cmdstr=new char[cl-q];
-		unique_ptr<char[]> upa(cmdstr);
-		memset(cmdstr,0,cl-q);
-		strncpy(cmdstr,q+1,cl-q-1);
-		if(strcmp(cmdstr,"color")==0) /// Change Color
-		{
-			char fcolor[16];
-			memset(fcolor,0,16);
-			char bcolor[16];
-			memset(bcolor,0,16);
-			char* comma=strstr(cl,",");
-			strncpy(fcolor,cl+1,comma-cl-1);
-			strncpy(bcolor,comma+1,qend-comma-1);
-			color fi=parse_basic_getcolor(fcolor);
-			color bi=parse_basic_getcolor(bcolor);
-			cf=fi;
-			cb=bi;
-			p=qend+1;
-			continue;
-		}
-		else if(strcmp(cmdstr,"goto")==0) /// Move Cursor To X,Y
+        char* qend=strstr(q,"}");
+        char* cl=strstr(q,"=");
+        char* cmdstr=new char[cl-q];
+        unique_ptr<char[]> upa(cmdstr);
+        memset(cmdstr,0,cl-q);
+        strncpy(cmdstr,q+1,cl-q-1);
+        if(strcmp(cmdstr,"color")==0) /// Change Color
+        {
+            char fcolor[16];
+            memset(fcolor,0,16);
+            char bcolor[16];
+            memset(bcolor,0,16);
+            char* comma=strstr(cl,",");
+            strncpy(fcolor,cl+1,comma-cl-1);
+            strncpy(bcolor,comma+1,qend-comma-1);
+            color fi=parse_basic_getcolor(fcolor);
+            color bi=parse_basic_getcolor(bcolor);
+            cf=fi;
+            cb=bi;
+            p=qend+1;
+            continue;
+        }
+        else if(strcmp(cmdstr,"goto")==0) /// Move Cursor To X,Y
         {
             char fpos[16];
             memset(fpos,0,16);
@@ -182,46 +182,46 @@ Screen* parse_str_basic(const char* str)
         {
             /// NOTICE: x... is the activated status
             char fcolor[16];
-			memset(fcolor,0,16);
-			char bcolor[16];
-			memset(bcolor,0,16);
+            memset(fcolor,0,16);
+            char bcolor[16];
+            memset(bcolor,0,16);
 
-			char xfcolor[16];
-			memset(xfcolor,0,16);
-			char xbcolor[16];
-			memset(xbcolor,0,16);
+            char xfcolor[16];
+            memset(xfcolor,0,16);
+            char xbcolor[16];
+            memset(xbcolor,0,16);
 
-			char tsame[16];
-			memset(tsame,0,16);
+            char tsame[16];
+            memset(tsame,0,16);
 
-			char* comma=strstr(cl,",");/// fcolor,bcolor
-			char* comma2=strstr(comma+1,",");/// bcolor,xfcolor
-			char* comma3=strstr(comma2+1,",");/// xfcolor,xbcolor
+            char* comma=strstr(cl,",");/// fcolor,bcolor
+            char* comma2=strstr(comma+1,",");/// bcolor,xfcolor
+            char* comma3=strstr(comma2+1,",");/// xfcolor,xbcolor
 
             char* comma4=strstr(comma3+1,",");/// xbcolor,same
             char* comma5=strstr(comma4+1,",");/// same,[#text
 
             char* text_end=strstr(comma5+1,"#]");/// text#]
 
-			strncpy(fcolor,cl+1,comma-cl-1);
-			strncpy(bcolor,comma+1,comma2-comma-1);
-			strncpy(xfcolor,comma2+1,comma3-comma2-1);
-			strncpy(xbcolor,comma3+1,comma4-comma3-1);
-			strncpy(tsame,comma4+1,comma5-comma4-1);
+            strncpy(fcolor,cl+1,comma-cl-1);
+            strncpy(bcolor,comma+1,comma2-comma-1);
+            strncpy(xfcolor,comma2+1,comma3-comma2-1);
+            strncpy(xbcolor,comma3+1,comma4-comma3-1);
+            strncpy(tsame,comma4+1,comma5-comma4-1);
 
-			color fi=parse_basic_getcolor(fcolor);
-			color bi=parse_basic_getcolor(bcolor);
-			color xfi=parse_basic_getcolor(xfcolor);
-			color xbi=parse_basic_getcolor(xbcolor);
+            color fi=parse_basic_getcolor(fcolor);
+            color bi=parse_basic_getcolor(bcolor);
+            color xfi=parse_basic_getcolor(xfcolor);
+            color xbi=parse_basic_getcolor(xbcolor);
 
-			char* k_text=new char[text_end-comma5+32];
-			unique_ptr<char[]> upt(k_text);
-			memset(k_text,0,text_end-comma5+32);
-			strncpy(k_text,comma5+3,text_end-comma5-3);
-			Text t_inactive(k_text,fi,bi);
+            char* k_text=new char[text_end-comma5+32];
+            unique_ptr<char[]> upt(k_text);
+            memset(k_text,0,text_end-comma5+32);
+            strncpy(k_text,comma5+3,text_end-comma5-3);
+            Text t_inactive(k_text,fi,bi);
 
-			Text t_active;
-			if(strcmp(tsame,"same")!=0)/// Not Same
+            Text t_active;
+            if(strcmp(tsame,"same")!=0)/// Not Same
             {
                 char* xtext_begin=strstr(text_end+2,"[#");
                 char* xtext_end=strstr(xtext_begin+2,"#]");
@@ -250,8 +250,8 @@ Screen* parse_str_basic(const char* str)
         {
             p=qend+1;
         }
-	}/// End of loop
+    }/// End of loop
 
-	return pScreen;
+    return pScreen;
 }
 #endif /// End of _kokoparser_h
